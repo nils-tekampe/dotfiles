@@ -20,21 +20,15 @@ else
     if [ $? -eq 0 ]; then
         echo "Session $SESSION already exists. Attaching."
         sleep 1
-        tmux attach -CC -t $SESSION
+        tmux attach -t $SESSION
     else                                
         # create a new session, named $SESSION, and detach from it
         tmux new-session -d -s $SESSION
         tmux new-window    -t $SESSION:0 
-        tmux split-window  -h -t $SESSION:0
-        tmux split-window  -v -t $SESSION:0
-
-        #tmux new-window    -t $SESSION:1 
-        #tmux new-window    -t $SESSION:2  
-        #tmux new-window    -t $SESSION:3  
-        #tmux split-window  -h -t $SESSION:3
-        #tmux new-window    -t $SESSION:4
+#        tmux split-window  -h -t $SESSION:0
+#        tmux split-window  -v -t $SESSION:0
         tmux select-window -t $SESSION:0
-        tmux attach -CC -t $SESSION
+        tmux attach -t $SESSION
 
     fi
 
