@@ -13,6 +13,8 @@ if [ "$MYHOST" = "Nilss-MBP" ]; then
     export WECHALLUSER="DerNils"
     export WECHALLTOKEN="20BAF-D0844-62A31-53B32-27185-62D8D"
 
+    ZSH_THEME="smyck"
+
 else
 
     echo "We are not on my MacBook. Let's do a few specific things."
@@ -24,6 +26,7 @@ else
         ln -s -f .tmux/.tmux.conf
         cp .tmux/.tmux.conf.local .
     fi
+
 
 
     tmux has-session -t $SESSION
@@ -42,17 +45,14 @@ else
 
     fi
 
+    ZSH_THEME="robbyrussell"
+
 fi
 
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="smyck"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -62,6 +62,11 @@ plugins=(git)
 
 # User configuration
 
+if [ ! -f ~/.oh-my-zsh/README.md]; then
+       echo "oh-my-zsh is not installed. please install"
+       exit 1
+       # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
