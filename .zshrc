@@ -16,6 +16,16 @@ if [ "$MYHOST" = "Nilss-MBP" ]; then
 else
 
     echo "We are not on my MacBook. Let's do a few specific things."
+    
+    if [ ! -f ~/.tmux/.tmux.conf ]; then
+        echo "TMUX config has not been found and will now be installed"
+        cd ~
+        git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+        ln -s -f .tmux/.tmux.conf
+        cp .tmux/.tmux.conf.local .
+    fi
+
+
     tmux has-session -t $SESSION
     if [ $? -eq 0 ]; then
         echo "Session $SESSION already exists. Attaching."
