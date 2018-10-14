@@ -1,23 +1,16 @@
 
+
+if [ ! -f ~/.oh-my-zsh/README.md]; then
+       echo "oh-my-zsh is not installed. please install"
+       exit 1
+       # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
+
 MYHOST=$(hostname)
 SESSION=main
 
-# if the session is already running, just attach to it.
-if [ "$MYHOST" = "Nilss-MBP" ]; then
 
-    echo "We are on my MacBook. Let's do a few specific things."
-    export PATH="/usr/local/opt/gettext/bin:/Library/TeX/texbin:/opt/local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/nils/skripte:/Users/nils/.cargo/bin"
-    ssh-add -K
-    test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
-
-    export WECHALLUSER="DerNils"
-    export WECHALLTOKEN="20BAF-D0844-62A31-53B32-27185-62D8D"
-
-    ZSH_THEME="smyck"
-
-else
-
-    echo "We are not on my MacBook. Let's do a few specific things."
     
     if [ ! -f ~/.tmux/.tmux.conf ]; then
         echo "TMUX config has not been found and will now be installed"
@@ -47,9 +40,6 @@ else
 
     ZSH_THEME="robbyrussell"
 
-fi
-
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -61,12 +51,6 @@ export ZSH=$HOME/.oh-my-zsh
 plugins=(git)
 
 # User configuration
-
-if [ ! -f ~/.oh-my-zsh/README.md]; then
-       echo "oh-my-zsh is not installed. please install"
-       exit 1
-       # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,20 +72,6 @@ alias pushDotFiles="cd ~/.dotfiles && GIT"
 alias pullDotFiles="cd ~/.dotfiles && git pull"
 
 alias shred="gshred -u"
-
-# And my functions 
-function flattenToFolder() {
-    find $1 -type f -size +307200k -exec mv {} $2 \;}
-
-
-function anybar { echo -n $1 | nc -4u -w0 localhost ${2:-1738}; }
-
-function push {
-    curl -s -F "aa7d7bik4596wdiogiv7gc1cmq1uvo" \
-        -F "user=uZQPseeXNuCh89BqDZYMLMD6t7WtWC" \
-        -F "title=Message from MacBook" \
-        -F "message=$1" https://api.pushover.net/1/messages.json
-}
 
 function checkCertStatus() {
     openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null | openssl x509 -inform pem -noout -text | grep "Not After"
