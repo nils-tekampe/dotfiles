@@ -1,6 +1,6 @@
 
 
-if [ ! -f ~/.oh-my-zsh/README.md]; then
+if [ ! -f ~/.oh-my-zsh/README.md ]; then
        echo "oh-my-zsh is not installed. please install"
        exit 1
        # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
